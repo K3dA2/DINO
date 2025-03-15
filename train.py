@@ -120,7 +120,7 @@ if __name__ == "__main__":
 
 
     # Initialize the dataset
-    root_folder = "/Users/ayanfe/Documents/Datasets/mammals"
+    root_folder = ""
     base_dataset = AnimalDataset(root_folder)
     multi_crop_dataset = MultiCropDataset(base_dataset, global_transform, local_transform, num_local_crops=3)
     train_loader = DataLoader(multi_crop_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
@@ -135,6 +135,8 @@ if __name__ == "__main__":
 
     epoch = 0
     
+    # Uncomment if avialable
+    '''
     # Load the checkpoint and model
     checkpoint_path = "weights/DINO-9.pth"  # Update this path if necessary
     checkpoint = torch.load(checkpoint_path)
@@ -142,7 +144,7 @@ if __name__ == "__main__":
     teacher.load_state_dict(checkpoint['teacher_state_dict'])
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     epoch = checkpoint.get("epoch",0)
-    
+    '''
 
     for param in teacher.parameters():
         param.requires_grad = False
